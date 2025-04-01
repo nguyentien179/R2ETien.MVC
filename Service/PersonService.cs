@@ -33,12 +33,12 @@ public class PersonService : IPersonService
 
     public void Update(Person person)
     {
-        if (!_context.Person.Any(p => p.Id == person.Id))
+
+        var existingPerson = _context.Person.FirstOrDefault(p => p.Id == person.Id);
+        if (existingPerson == null)
         {
             throw new KeyNotFoundException($"Person with ID {person.Id} not found.");
         }
-
-        var existingPerson = _context.Person.FirstOrDefault(p => p.Id == person.Id);
         _context.Entry(existingPerson).CurrentValues.SetValues(person);
         _context.SaveChanges();
     }
@@ -56,11 +56,6 @@ public class PersonService : IPersonService
 
     private void ValidatePerson(Person person)
     {
-        if (_context.Person.Any(p => p.Id == person.Id))
-        {
-            throw new ArgumentException("Person with this ID already exists.");
-        }
-
         if (
             string.IsNullOrWhiteSpace(person.FirstName)
             || string.IsNullOrWhiteSpace(person.LastName)
