@@ -1,9 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using R2ETien.MVC.Entities;
 using R2ETien.MVC.Enum;
 using R2ETien.MVC.Interface;
-using R2ETien.MVC.Models;
 
 namespace R2ETien.MVC.Controllers;
 
@@ -32,7 +32,7 @@ public class RookiesController : Controller
             _ => members
         };
 
-        return View(members);
+        return View(members.ToList());
     }
 
     [HttpGet("{id}")]

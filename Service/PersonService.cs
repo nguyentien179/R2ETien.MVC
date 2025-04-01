@@ -1,7 +1,7 @@
 using System;
 using R2ETien.MVC.Data;
+using R2ETien.MVC.Entities;
 using R2ETien.MVC.Interface;
-using R2ETien.MVC.Models;
 
 namespace R2ETien.MVC.Service;
 
@@ -33,7 +33,6 @@ public class PersonService : IPersonService
 
     public void Update(Person person)
     {
-
         var existingPerson = _context.Person.FirstOrDefault(p => p.Id == person.Id);
         if (existingPerson == null)
         {

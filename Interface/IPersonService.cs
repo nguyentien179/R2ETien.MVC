@@ -1,5 +1,5 @@
 using System;
-using R2ETien.MVC.Models;
+using R2ETien.MVC.Entities;
 
 namespace R2ETien.MVC.Interface;
 

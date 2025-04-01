@@ -10,5 +10,6 @@ public static class DataExtension
         using var scope = app.Services.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<Context>();
         dbContext.Database.Migrate();
+        Context.SeedData(dbContext);
     }
 }
