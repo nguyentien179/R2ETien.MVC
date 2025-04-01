@@ -2,6 +2,28 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "Bia.Countries/3.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Bia.Countries.dll": {
+            "related": ".deps.json"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Bia.Countries.dll": {
+            "related": ".deps.json"
+          }
+        }
+      },
+      "Countries/2.0.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net461/Countries.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Countries.dll": {}
+        }
+      },
       "EPPlus/8.0.1": {
         "type": "package",
         "dependencies": {
@@ -1384,6 +1406,37 @@
     }
   },
   "libraries": {
+    "Bia.Countries/3.0.0": {
+      "sha512": "/6eJIq0G39rZCycr24UEb2L3+SvpvfnedRy3SW6x0Amx8XwiYRJwsZb26QqpaBW6awMgtPESOg+fC6IM9YZ10A==",
+      "type": "package",
+      "path": "bia.countries/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bia.countries.3.0.0.nupkg.sha512",
+        "bia.countries.nuspec",
+        "lib/net40/Bia.Countries.dll",
+        "lib/net45/Bia.Countries.dll",
+        "lib/net461/Bia.Countries.dll",
+        "lib/netstandard2.0/Bia.Countries.deps.json",
+        "lib/netstandard2.0/Bia.Countries.dll"
+      ]
+    },
+    "Countries/2.0.0.1": {
+      "sha512": "79xFeRES2rlql3v4g+qMKgJzssYLqa3Uvzs8pAOCh7fK6pY6Yxbdm3F644jOK63fYGdh+1kbGm0ZGzYwyXMPZw==",
+      "type": "package",
+      "path": "countries/2.0.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "countries.2.0.0.1.nupkg.sha512",
+        "countries.nuspec",
+        "lib/net40/Countries.dll",
+        "lib/net45/Countries.dll",
+        "lib/net46/Countries.dll",
+        "lib/net461/Countries.dll"
+      ]
+    },
     "EPPlus/8.0.1": {
       "sha512": "Lk46SFgp9P58+SB8ZHhsAmXlw3skC3+Ky2Nd3xmB+R01z7ZK8AUxivkOg20PZ/O94xMLqQxmORRH5tRr2JmKew==",
       "type": "package",
@@ -3908,6 +3961,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Bia.Countries >= 3.0.0",
+      "Countries >= 2.0.0.1",
       "EPPlus >= 8.0.1",
       "Microsoft.EntityFrameworkCore.Sqlite >= 9.0.3",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.3"
@@ -3955,6 +4010,14 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Bia.Countries": {
+            "target": "Package",
+            "version": "[3.0.0, )"
+          },
+          "Countries": {
+            "target": "Package",
+            "version": "[2.0.0.1, )"
+          },
           "EPPlus": {
             "target": "Package",
             "version": "[8.0.1, )"
@@ -3992,5 +4055,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Countries 2.0.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Countries",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

@@ -1,4 +1,5 @@
 using System;
+using Maddalena;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using R2ETien.MVC.Entities;
@@ -45,7 +46,9 @@ public class RookiesController : Controller
     [HttpGet("AddMember")]
     public IActionResult AddMember()
     {
-        return View(); // Renders the form
+        var countries = Country.All.Select(c => c.CommonName).OrderBy(c => c).ToList();
+        ViewBag.Countries = countries;
+        return View();
     }
 
     [HttpPost("AddMember")]
@@ -76,7 +79,9 @@ public class RookiesController : Controller
         {
             return NotFound();
         }
-        return View(person); // Send person data to the view for pre-filling
+        var countries = Country.All.Select(c => c.CommonName).OrderBy(c => c).ToList();
+        ViewBag.Countries = countries;
+        return View(person);
     }
 
     [HttpPost("EditMember/{id}")]
