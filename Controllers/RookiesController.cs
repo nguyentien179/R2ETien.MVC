@@ -79,7 +79,7 @@ public class RookiesController : Controller
         return View(person); // Send person data to the view for pre-filling
     }
 
-    [HttpPost]
+    [HttpPost("EditMember/{id}")]
     public IActionResult EditMember(Person person)
     {
         if (!ModelState.IsValid)

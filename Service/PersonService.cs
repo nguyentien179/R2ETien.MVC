@@ -37,8 +37,9 @@ public class PersonService : IPersonService
         {
             throw new KeyNotFoundException($"Person with ID {person.Id} not found.");
         }
-        ValidatePerson(person);
-        _context.Person.Update(person);
+
+        var existingPerson = _context.Person.FirstOrDefault(p => p.Id == person.Id);
+        _context.Entry(existingPerson).CurrentValues.SetValues(person);
         _context.SaveChanges();
     }
 

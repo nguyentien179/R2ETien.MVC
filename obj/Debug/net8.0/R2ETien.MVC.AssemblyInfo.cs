@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("R2ETien.MVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+051169937fd6211f20a201777ca99b719d54ebac")]
 [assembly: System.Reflection.AssemblyProductAttribute("R2ETien.MVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("R2ETien.MVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
