@@ -125,7 +125,7 @@ public class RookiesController : Controller
         }
     }
 
-    [Route("Excel")]
+    [Route("ExportToExcel")]
     public IActionResult ExportToExcel()
     {
         var members = _personService.GetAll().ToList();
