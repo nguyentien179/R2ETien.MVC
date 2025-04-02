@@ -37,7 +37,7 @@
 
     <div class="form-group">
         <label asp-for="BirthPlace">Birth Place</label>
-        <select asp-for="BirthPlace" asp-items="@(new SelectList(ViewBag.Countries))" class="form-control">
+        <input asp-for="BirthPlace" class="form-control" required />
         </select>
     </div>
 

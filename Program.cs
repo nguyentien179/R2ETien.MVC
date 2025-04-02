@@ -11,7 +11,6 @@ var connString = builder.Configuration.GetConnectionString("MVC");
 builder.Services.AddSqlite<Context>(connString);
 
 builder.Services.AddScoped<IPersonService, PersonService>();
-builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
 // Add services to the container.

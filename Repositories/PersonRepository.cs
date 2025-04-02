@@ -1,4 +1,5 @@
 using System;
+using Microsoft.EntityFrameworkCore;
 using R2ETien.MVC.Data;
 using R2ETien.MVC.Entities;
 using R2ETien.MVC.Interface;
@@ -21,7 +22,7 @@ public class PersonRepository : IPersonRepository
 
     public Person GetById(Guid id)
     {
-        return _context.Person.Find(id)
+        return _context.Person.AsNoTracking().FirstOrDefault(p => p.Id == id)
             ?? throw new KeyNotFoundException($"Person with ID {id} not found.");
     }
 

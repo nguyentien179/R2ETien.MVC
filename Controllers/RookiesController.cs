@@ -1,5 +1,4 @@
 using System;
-using Maddalena;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using R2ETien.MVC.Entities;
@@ -12,12 +11,10 @@ namespace R2ETien.MVC.Controllers;
 public class RookiesController : Controller
 {
     private IPersonService _personService;
-    private ICountryService _countryService;
 
-    public RookiesController(IPersonService personService, ICountryService countryService)
+    public RookiesController(IPersonService personService)
     {
         _personService = personService;
-        _countryService = countryService;
     }
 
     [HttpGet]
@@ -46,10 +43,9 @@ public class RookiesController : Controller
         return person != null ? View(person) : NotFound("Member not found");
     }
 
-    [HttpGet("AddMemberView")]
+    [HttpGet("AddMember")]
     public IActionResult AddMemberView()
     {
-        ViewBag.Countries = _countryService.GetAllCountryNames();
         return View();
     }
 
@@ -73,15 +69,14 @@ public class RookiesController : Controller
         }
     }
 
-    [HttpGet("EditMemberView/{id}")]
-    public IActionResult EditMemberView(Guid id)
+    [HttpGet("EditMember/{id:guid}")]
+    public IActionResult EditMember(Guid id)
     {
         var person = _personService.GetById(id);
         if (person == null)
         {
             return NotFound();
         }
-        ViewBag.Countries = _countryService.GetAllCountryNames();
         return View(person);
     }
 
@@ -90,22 +85,22 @@ public class RookiesController : Controller
     {
         if (!ModelState.IsValid)
         {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine($"Validation Error: {error.ErrorMessage}");
+            }
             return View(person);
-        }
-
-        var existingPerson = _personService.GetById(person.Id);
-        if (existingPerson == null)
-        {
-            return NotFound("Person not found.");
         }
 
         try
         {
+            Console.WriteLine($"Updating person with ID: {person.Id}");
             _personService.Update(person);
             return RedirectToAction("Members");
         }
         catch (Exception ex)
         {
+            Console.WriteLine($"Exception: {ex.Message}");
             ModelState.AddModelError("", ex.Message);
             return View(person);
         }

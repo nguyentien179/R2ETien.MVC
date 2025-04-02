@@ -7,17 +7,10 @@ namespace R2ETien.MVC.Service;
 public class PersonService : IPersonService
 {
     private readonly IPersonRepository _personRepository;
-    private readonly ICountryService _countryService;
 
-    public PersonService(IPersonRepository personRepository, ICountryService countryService)
+    public PersonService(IPersonRepository personRepository)
     {
         _personRepository = personRepository;
-        _countryService = countryService;
-    }
-
-    public List<string> GetCountries()
-    {
-        return _countryService.GetAllCountryNames();
     }
 
     public List<Person> GetAll()
