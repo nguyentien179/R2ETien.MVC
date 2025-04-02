@@ -52,40 +52,4 @@ public class PersonService : IPersonService
         _context.Person.Remove(person);
         _context.SaveChanges();
     }
-
-    private void ValidatePerson(Person person)
-    {
-        if (
-            string.IsNullOrWhiteSpace(person.FirstName)
-            || string.IsNullOrWhiteSpace(person.LastName)
-        )
-        {
-            throw new ArgumentException("First name and last name are required.");
-        }
-
-        if (person.DateOfBirth > DateTime.Now)
-        {
-            throw new ArgumentException("Date of birth cannot be in the future.");
-        }
-
-        if (person.DateOfBirth.Year < 1900)
-        {
-            throw new ArgumentException("Date of birth must be between 1900 and the current year.");
-        }
-
-        if (
-            string.IsNullOrWhiteSpace(person.PhoneNumber)
-            || !System.Text.RegularExpressions.Regex.IsMatch(person.PhoneNumber, @"^\d{10,}$")
-        )
-        {
-            throw new ArgumentException(
-                "Phone number is required and must contain at least 10 digits."
-            );
-        }
-
-        if (string.IsNullOrWhiteSpace(person.BirthPlace))
-        {
-            throw new ArgumentException("Birth place is required.");
-        }
-    }
 }
