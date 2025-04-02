@@ -3,7 +3,7 @@ using R2ETien.MVC.Entities;
 
 namespace R2ETien.MVC.Interface;
 
-public interface IPersonService
+public interface IPersonRepository
 {
     void Create(Person person);
     void Update(Person person);

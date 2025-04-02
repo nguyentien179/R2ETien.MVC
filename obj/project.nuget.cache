@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FjRdMr6O7jc=",
+  "dgSpecHash": "uDaK5jZbteM=",
   "success": true,
   "projectFilePath": "D:\\dotnet projects\\R2E.MVC\\R2ETien.MVC\\R2ETien.MVC.csproj",
   "expectedPackageFiles": [
@@ -68,11 +68,7 @@
     "C:\\Users\\chens\\.nuget\\packages\\system.text.encoding.codepages\\8.0.0\\system.text.encoding.codepages.8.0.0.nupkg.sha512",
     "C:\\Users\\chens\\.nuget\\packages\\system.text.encodings.web\\9.0.3\\system.text.encodings.web.9.0.3.nupkg.sha512",
     "C:\\Users\\chens\\.nuget\\packages\\system.text.json\\9.0.3\\system.text.json.9.0.3.nupkg.sha512",
-    "C:\\Users\\chens\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
-    "C:\\Users\\chens\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.14\\microsoft.netcore.app.ref.8.0.14.nupkg.sha512",
-    "C:\\Users\\chens\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.14\\microsoft.windowsdesktop.app.ref.8.0.14.nupkg.sha512",
-    "C:\\Users\\chens\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.14\\microsoft.aspnetcore.app.ref.8.0.14.nupkg.sha512",
-    "C:\\Users\\chens\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.14\\microsoft.netcore.app.host.win-x64.8.0.14.nupkg.sha512"
+    "C:\\Users\\chens\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512"
   ],
   "logs": [
     {

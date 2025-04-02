@@ -1,4 +1,5 @@
-﻿@model List<R2ETien.MVC.Entities.Person> 
+﻿@using R2ETien.MVC.Enum
+@model List<R2ETien.MVC.Entities.Person> 
 
 @{
     ViewData["Title"] = "Members List";
@@ -10,12 +11,12 @@
 <form method="get">
     <label for="filter">Filter by:</label>
     <select name="filter" id="filter">
-        <option value="">All</option>
-        <option value="males">Males</option>
-        <option value="oldest">Oldest</option>
-        <option value="equals2000">Born in 2000</option>
-        <option value="greaterthan2000">Born after 2000</option>
-        <option value="lessthan2000">Born before 2000</option>
+        <option value="@Filter.All">All</option>
+        <option value=@Filter.Male>Males</option>
+        <option value=@Filter.Oldest>Oldest</option>
+        <option value=@Filter.Equals2000>Born in 2000</option>
+        <option value=@Filter.Greaterthan2000>Born after 2000</option>
+        <option value=@Filter.Lessthan2000>Born before 2000</option>
     </select>
     <button type="submit">Apply Filter</button>
 </form>
@@ -24,7 +25,7 @@
     Export to Excel
 </a>
 
-<a href="/Nashtech/AddMember" class="btn btn-danger" style="margin-top: 10px;">
+<a href="/Nashtech/AddMemberView" class="btn btn-danger" style="margin-top: 10px;">
  Add Member
 </a>
 

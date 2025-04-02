@@ -12,42 +12,44 @@ namespace R2ETien.MVC.Controllers;
 public class RookiesController : Controller
 {
     private IPersonService _personService;
+    private ICountryService _countryService;
 
-    public RookiesController(IPersonService personService)
+    public RookiesController(IPersonService personService, ICountryService countryService)
     {
         _personService = personService;
+        _countryService = countryService;
     }
 
     [HttpGet]
-    public IActionResult Members([FromQuery] string filter)
+    public IActionResult Members([FromQuery] Filter filter)
     {
         IEnumerable<Person> members = _personService.GetAll();
 
         members = filter switch
         {
-            "males" => members.Where(m => m.Gender == Gender.Male),
-            "oldest" => members.OrderBy(m => m.DateOfBirth).Take(1),
-            "equals2000" => members.Where(m => m.DateOfBirth.Year == 2000),
-            "greaterthan2000" => members.Where(m => m.DateOfBirth.Year > 2000),
-            "lessthan2000" => members.Where(m => m.DateOfBirth.Year < 2000),
-            _ => members
+            Filter.All => _personService.GetAll(),
+            Filter.Male => members.Where(m => m.Gender == Gender.Male),
+            Filter.Oldest => members.OrderBy(m => m.DateOfBirth).Take(1),
+            Filter.Equals2000 => members.Where(m => m.DateOfBirth.Year == 2000),
+            Filter.Greaterthan2000 => members.Where(m => m.DateOfBirth.Year > 2000),
+            Filter.Lessthan2000 => members.Where(m => m.DateOfBirth.Year < 2000),
+            _ => members,
         };
 
         return View(members.ToList());
     }
 
-    [HttpGet("{id}")]
-    public IActionResult MemberDetails(int id)
+    [HttpGet("{id:guid}")]
+    public IActionResult MemberDetails(Guid id)
     {
         var person = _personService.GetById(id);
         return person != null ? View(person) : NotFound("Member not found");
     }
 
-    [HttpGet("AddMember")]
-    public IActionResult AddMember()
+    [HttpGet("AddMemberView")]
+    public IActionResult AddMemberView()
     {
-        var countries = Country.All.Select(c => c.CommonName).OrderBy(c => c).ToList();
-        ViewBag.Countries = countries;
+        ViewBag.Countries = _countryService.GetAllCountryNames();
         return View();
     }
 
@@ -71,16 +73,15 @@ public class RookiesController : Controller
         }
     }
 
-    [HttpGet("EditMember/{id}")]
-    public IActionResult EditMember(int id)
+    [HttpGet("EditMemberView/{id}")]
+    public IActionResult EditMemberView(Guid id)
     {
-        var person = _personService.GetById(id); // Fetch person from DB
+        var person = _personService.GetById(id);
         if (person == null)
         {
             return NotFound();
         }
-        var countries = Country.All.Select(c => c.CommonName).OrderBy(c => c).ToList();
-        ViewBag.Countries = countries;
+        ViewBag.Countries = _countryService.GetAllCountryNames();
         return View(person);
     }
 
@@ -111,7 +112,7 @@ public class RookiesController : Controller
     }
 
     [HttpPost("Delete")]
-    public IActionResult Delete(int id)
+    public IActionResult Delete(Guid id)
     {
         try
         {

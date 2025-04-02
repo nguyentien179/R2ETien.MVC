@@ -1,5 +1,4 @@
 using System;
-using R2ETien.MVC.Data;
 using R2ETien.MVC.Entities;
 using R2ETien.MVC.Interface;
 
@@ -7,49 +6,44 @@ namespace R2ETien.MVC.Service;
 
 public class PersonService : IPersonService
 {
-    private readonly Context _context;
+    private readonly IPersonRepository _personRepository;
+    private readonly ICountryService _countryService;
 
-    public PersonService(Context context)
+    public PersonService(IPersonRepository personRepository, ICountryService countryService)
     {
-        _context = context;
+        _personRepository = personRepository;
+        _countryService = countryService;
+    }
+
+    public List<string> GetCountries()
+    {
+        return _countryService.GetAllCountryNames();
     }
 
     public List<Person> GetAll()
     {
-        return _context.Person.ToList();
+        return _personRepository.GetAll();
     }
 
-    public Person GetById(int id)
+    public Person GetById(Guid id)
     {
-        return _context.Person.Find(id)
-            ?? throw new KeyNotFoundException($"Person with ID {id} not found.");
+        return PersonHelper.ValidateAndFindPerson(id, _personRepository);
     }
 
     public void Create(Person person)
     {
-        _context.Person.Add(person);
-        _context.SaveChanges();
+        _personRepository.Create(person);
     }
 
     public void Update(Person person)
     {
-        var existingPerson = _context.Person.FirstOrDefault(p => p.Id == person.Id);
-        if (existingPerson == null)
-        {
-            throw new KeyNotFoundException($"Person with ID {person.Id} not found.");
-        }
-        _context.Entry(existingPerson).CurrentValues.SetValues(person);
-        _context.SaveChanges();
+        PersonHelper.ValidateAndFindPerson(person.Id, _personRepository);
+        _personRepository.Update(person);
     }
 
-    public void Delete(int id)
+    public void Delete(Guid id)
     {
-        var person = _context.Person.Find(id);
-        if (person == null)
-        {
-            throw new KeyNotFoundException($"Person with ID {id} not found.");
-        }
-        _context.Person.Remove(person);
-        _context.SaveChanges();
+        PersonHelper.ValidateAndFindPerson(id, _personRepository);
+        _personRepository.Delete(id);
     }
 }

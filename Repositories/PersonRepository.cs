@@ -1,0 +1,50 @@
+using System;
+using R2ETien.MVC.Data;
+using R2ETien.MVC.Entities;
+using R2ETien.MVC.Interface;
+
+namespace R2ETien.MVC.Repositories;
+
+public class PersonRepository : IPersonRepository
+{
+    private readonly Context _context;
+
+    public PersonRepository(Context context)
+    {
+        _context = context;
+    }
+
+    public List<Person> GetAll()
+    {
+        return _context.Person.ToList();
+    }
+
+    public Person GetById(Guid id)
+    {
+        return _context.Person.Find(id)
+            ?? throw new KeyNotFoundException($"Person with ID {id} not found.");
+    }
+
+    public void Create(Person person)
+    {
+        _context.Person.Add(person);
+        _context.SaveChanges();
+    }
+
+    public void Update(Person person)
+    {
+        _context.Person.Update(person);
+        _context.SaveChanges();
+    }
+
+    public void Delete(Guid id)
+    {
+        var person = _context.Person.Find(id);
+        if (person == null)
+        {
+            throw new KeyNotFoundException($"Person with ID {id} not found.");
+        }
+        _context.Person.Remove(person);
+        _context.SaveChanges();
+    }
+}
