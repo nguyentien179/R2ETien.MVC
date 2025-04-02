@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using R2ETien.MVC.Data;
 using R2ETien.MVC.Entities;
@@ -28,12 +29,14 @@ public class PersonRepository : IPersonRepository
 
     public void Create(Person person)
     {
+        ValidatePerson(person);
         _context.Person.Add(person);
         _context.SaveChanges();
     }
 
     public void Update(Person person)
     {
+        ValidatePerson(person);
         _context.Person.Update(person);
         _context.SaveChanges();
     }
@@ -47,5 +50,17 @@ public class PersonRepository : IPersonRepository
         }
         _context.Person.Remove(person);
         _context.SaveChanges();
+    }
+
+    private void ValidatePerson(Person person)
+    {
+        var validationResults = new List<ValidationResult>();
+        var validationContext = new ValidationContext(person);
+
+        if (!Validator.TryValidateObject(person, validationContext, validationResults, true))
+        {
+            var errors = string.Join("; ", validationResults.Select(vr => vr.ErrorMessage));
+            throw new ValidationException($"Validation failed: {errors}");
+        }
     }
 }
